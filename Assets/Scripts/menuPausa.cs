@@ -3,32 +3,42 @@ using UnityEngine.UI;
 
 public class PausaJuego : MonoBehaviour
 {
-    // booleano para saber si esta pausado
     private bool juegoPausado = false;
+
     [SerializeField] private GameObject menuPausa;
-    [SerializeField] private GameObject Menu;
-    [SerializeField] private Button reanudarButton;
+    [SerializeField] private GameObject menuOpciones;
+
+    [SerializeField] private Button botonReanudar;
+    [SerializeField] private Button botonOpciones;
+    [SerializeField] private Button botonVolver;
 
     void Start()
     {
-        
-        if (reanudarButton != null)
-        {
-            reanudarButton.onClick.AddListener(Reanudar); 
-        }
+        if (botonReanudar != null)
+            botonReanudar.onClick.AddListener(Reanudar);
+
+        if (botonOpciones != null)
+            botonOpciones.onClick.AddListener(AbrirOpciones);
+
+        if (botonVolver != null)
+            botonVolver.onClick.AddListener(CerrarOpciones);
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (juegoPausado)
+            if (juegoPausado && menuPausa.activeSelf)
             {
                 Reanudar();
             }
-            else
+            else if (!juegoPausado)
             {
                 Pausar();
+            }
+            else if (juegoPausado && menuOpciones.activeSelf)
+            {
+                CerrarOpciones(); // Si estás en opciones y pulsas ESC, vuelve al menú pausa
             }
         }
     }
@@ -37,21 +47,29 @@ public class PausaJuego : MonoBehaviour
     {
         Time.timeScale = 0f;
         juegoPausado = true;
-        Debug.Log("Juego pausado");
-        // Activar el menú de pausa (Canvas)
         menuPausa.SetActive(true);
-        Menu.SetActive(true);
-
+        menuOpciones.SetActive(false);
+        Debug.Log("Juego pausado");
     }
 
     void Reanudar()
     {
         Time.timeScale = 1f;
         juegoPausado = false;
-        Debug.Log("Juego reanudado");
-        // Desactivar el menú de pausa (Canvas)
         menuPausa.SetActive(false);
-        Menu.SetActive(false);
+        menuOpciones.SetActive(false);
+        Debug.Log("Juego reanudado");
+    }
+
+    void AbrirOpciones()
+    {
+        menuPausa.SetActive(false);
+        menuOpciones.SetActive(true);
+    }
+
+    void CerrarOpciones()
+    {
+        menuOpciones.SetActive(false);
+        menuPausa.SetActive(true);
     }
 }
-
