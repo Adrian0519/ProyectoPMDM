@@ -10,6 +10,7 @@ TagManager:
   - Pinchos
   - Enemigo
   - Bloqueo
+  - Bala
   layers:
   - Default
   - TransparentFX

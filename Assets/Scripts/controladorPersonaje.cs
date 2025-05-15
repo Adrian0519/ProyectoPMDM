@@ -8,13 +8,23 @@ public class controladorPersonaje : MonoBehaviour
     private float moveInput;
     private Vector3 velocity;
     private bool isGrounded;
-    // Update is called once per frame
+
+    // ?? Campos para disparar
+    [SerializeField] private GameObject proyectilPrefab;
+    [SerializeField] private Transform puntoDisparo;
+    [SerializeField] private float velocidadProyectil = 10f;
+
     void Update()
     {
-        
         Move();
         ApplyGravity();
         Jump();
+
+        // Disparo
+        if (Input.GetButtonDown("Fire1")) // Clic izquierdo o Ctrl por defecto
+        {
+            Disparar();
+        }
     }
 
     private void Move()
@@ -26,15 +36,16 @@ public class controladorPersonaje : MonoBehaviour
         transform.position += movement * speed * Time.deltaTime;
 
         // Girar el personaje con las escalas que pasaste
-        if (moveInput > 0) // Derecha
+        if (moveInput > 0)
         {
             transform.localScale = new Vector3(0.1402395f, 0.1435575f, 1f);
         }
-        else if (moveInput < 0) // Izquierda
+        else if (moveInput < 0)
         {
             transform.localScale = new Vector3(-0.1402395f, 0.1435575f, 1f);
-        }       
+        }
     }
+
     private void ApplyGravity()
     {
         if (!isGrounded)
@@ -54,35 +65,42 @@ public class controladorPersonaje : MonoBehaviour
         }
     }
 
-    // Detectar cuando tocamos el suelo
+    private void Disparar()
+    {
+        if (proyectilPrefab != null && puntoDisparo != null)
+        {
+            GameObject proyectil = Instantiate(proyectilPrefab, puntoDisparo.position, Quaternion.identity);
+
+            Rigidbody2D rb = proyectil.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                float direccion = transform.localScale.x > 0 ? 1f : -1f;
+                rb.velocity = new Vector2(direccion * velocidadProyectil, 0f);
+            }
+        }
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("suelo"))
         {
             isGrounded = true;
         }
-        if(collision.gameObject.CompareTag("Pinchos"))
+        if (collision.gameObject.CompareTag("Pinchos") || collision.gameObject.CompareTag("Enemigo"))
         {
             Debug.Log("muerto");
             Destroy(gameObject);
         }
-        if (collision.gameObject.CompareTag("Enemigo"))
-        {
-            Debug.Log("muerto");
-            Destroy(gameObject);
-        }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Completado"))
+        if (collision.gameObject.CompareTag("Completado"))
         {
             Debug.Log("COMPLETADO");
         }
     }
 
-    // Detectar cuando dejamos de tocar el suelo
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("suelo"))
@@ -90,6 +108,4 @@ public class controladorPersonaje : MonoBehaviour
             isGrounded = false;
         }
     }
-
-    
 }
