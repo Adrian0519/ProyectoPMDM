@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance; 
+    public static GameManager Instance;
 
     private int life;
     public TextMeshProUGUI vidaPlayerGUI;
@@ -59,4 +59,3 @@ public class GameManager : MonoBehaviour
     }
 
 }
-

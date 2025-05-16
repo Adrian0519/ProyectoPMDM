@@ -47,10 +47,16 @@ public class controladorPersonaje : MonoBehaviour
         if (moveInput > 0)
         {
             transform.localScale = new Vector3(0.1402395f, 0.1435575f, 1f);
+            animator.SetBool("Caminando",true);
         }
         else if (moveInput < 0)
         {
             transform.localScale = new Vector3(-0.1402395f, 0.1435575f, 1f);
+            animator.SetBool("Caminando", true);
+        }
+        else
+        {
+            animator.SetBool("Caminando", false);
         }
     }
 
@@ -70,6 +76,11 @@ public class controladorPersonaje : MonoBehaviour
             velocity.y = jumpForce;
             transform.position += velocity * Time.deltaTime;
             isGrounded = false;
+            animator.SetBool("Saltar", true);
+        }
+        else
+        {
+            animator.SetBool("Saltar", false);
         }
     }
 
@@ -82,12 +93,14 @@ public class controladorPersonaje : MonoBehaviour
             Rigidbody2D rb = proyectil.GetComponent<Rigidbody2D>();
             if (rb != null)
             {
+                animator.SetTrigger("Atacando");
                 float direccion = transform.localScale.x > 0 ? 1f : -1f;
                 rb.linearVelocity = new Vector2(direccion * velocidadProyectil, 0f);
             }
             // Destruye el proyectil después de 5 segundos
             Destroy(proyectil, 5f);
         }
+       
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
