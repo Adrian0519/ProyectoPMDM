@@ -42,7 +42,7 @@ TagManager:
   - 
   - 
   - 
-  - 
+  - CanvasInfo
   - 
   m_SortingLayers:
   - name: Default

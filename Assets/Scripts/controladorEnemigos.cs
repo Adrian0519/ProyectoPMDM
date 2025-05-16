@@ -35,7 +35,14 @@ public class MovimientoEnemigo : MonoBehaviour
         {
             Girar();
         }
+        //La bala se desruye si impacta
+        if (col.gameObject.CompareTag("Bala"))
+        {
+            Destroy(gameObject); // Destruye al enemigo
+            Destroy(col.gameObject); // Opcional: destruye la bala también
+        }
     }
+
 
 
     // Método que invierte la dirección de movimiento del enemigo
@@ -49,6 +56,9 @@ public class MovimientoEnemigo : MonoBehaviour
         escala.x *= -1;
         transform.localScale = escala;
     }
+
+    
+
 }
 
 

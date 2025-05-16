@@ -1,18 +1,27 @@
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class controladorPersonaje : MonoBehaviour
 {
+    public Animator animator;
     [SerializeField] private float jumpForce = 12f;
     [SerializeField] private float gravity = -20f;
     [SerializeField] private float speed = 5f;
     private float moveInput;
     private Vector3 velocity;
     private bool isGrounded;
+    private Vector3 puntoInicio;
 
-    // ?? Campos para disparar
+
+    //  Campos para disparar
     [SerializeField] private GameObject proyectilPrefab;
     [SerializeField] private Transform puntoDisparo;
     [SerializeField] private float velocidadProyectil = 10f;
+
+    void Start()
+    {
+        puntoInicio = transform.position; // Guarda donde inicia el personaje
+    }
 
     void Update()
     {
@@ -20,8 +29,7 @@ public class controladorPersonaje : MonoBehaviour
         ApplyGravity();
         Jump();
 
-        // Disparo
-        if (Input.GetButtonDown("Fire1")) // Clic izquierdo o Ctrl por defecto
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Disparar();
         }
@@ -57,7 +65,7 @@ public class controladorPersonaje : MonoBehaviour
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && isGrounded)
         {
             velocity.y = jumpForce;
             transform.position += velocity * Time.deltaTime;
@@ -75,8 +83,10 @@ public class controladorPersonaje : MonoBehaviour
             if (rb != null)
             {
                 float direccion = transform.localScale.x > 0 ? 1f : -1f;
-                rb.velocity = new Vector2(direccion * velocidadProyectil, 0f);
+                rb.linearVelocity = new Vector2(direccion * velocidadProyectil, 0f);
             }
+            // Destruye el proyectil después de 5 segundos
+            Destroy(proyectil, 5f);
         }
     }
 
@@ -86,18 +96,34 @@ public class controladorPersonaje : MonoBehaviour
         {
             isGrounded = true;
         }
+
         if (collision.gameObject.CompareTag("Pinchos") || collision.gameObject.CompareTag("Enemigo"))
         {
-            Debug.Log("muerto");
-            Destroy(gameObject);
+            GameManager.Instance.SubLife(1);
+            Debug.Log("Vida restante: " + GameManager.Instance.GetLife());
+
+            if (GameManager.Instance.GetLife() == 0)
+            {
+                Debug.Log("jugador muerto");
+                SceneManager.LoadScene("GameOver");
+                Destroy(gameObject); 
+            }
+            else
+            {
+                // Reaparecer en el punto inicial
+                transform.position = puntoInicio;
+                velocity = Vector3.zero; // Detiene el movimiento vertical
+                Debug.Log("Reapareció en el punto de inicio");
+            }
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Completado"))
         {
-            Debug.Log("COMPLETADO");
+            SceneManager.LoadScene("Transicion");
         }
     }
 
