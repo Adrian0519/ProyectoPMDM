@@ -5,6 +5,8 @@ public class MovimientoEnemigo : MonoBehaviour
 {
     // Velocidad de movimiento del enemigo. Editable desde el Inspector.
     [SerializeField] private float velocidad = 2f;
+    //Prefab del power-up
+    [SerializeField] private GameObject prefabPowerUp;
 
     // Indica si el enemigo se está moviendo hacia la derecha.
     private bool moviendoDerecha = true;
@@ -38,6 +40,14 @@ public class MovimientoEnemigo : MonoBehaviour
         //La bala se desruye si impacta
         if (col.gameObject.CompareTag("Bala"))
         {
+
+            // Probabilidad del 20% de soltar power-up
+            float chance = Random.Range(0f, 1f);
+            if (chance <= 0.2f && prefabPowerUp != null)
+            {
+                Instantiate(prefabPowerUp, transform.position, Quaternion.identity);
+            }
+
             Destroy(gameObject); // Destruye al enemigo
             Destroy(col.gameObject); // Opcional: destruye la bala también
         }
