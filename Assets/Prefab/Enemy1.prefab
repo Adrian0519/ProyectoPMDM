@@ -126,6 +126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidad: 2
+  prefabPowerUp: {fileID: 3025204964517831935, guid: 391e1fbe23857dc4e9b5f02a41dee560, type: 3}
+  muerteSound: {fileID: 8300000, guid: f3652bfa3b8013549bedba8d8a7ee083, type: 3}
 --- !u!50 &6884111512060807757
 Rigidbody2D:
   serializedVersion: 5

@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 
 public class controladorPersonaje : MonoBehaviour
@@ -13,14 +14,21 @@ public class controladorPersonaje : MonoBehaviour
     private Vector3 puntoInicio;
 
 
-    //  Campos para disparar
+    //  Campos para disparar y audio
     [SerializeField] private GameObject proyectilPrefab;
     [SerializeField] private Transform puntoDisparo;
     [SerializeField] private float velocidadProyectil = 10f;
+    [SerializeField] private AudioClip disparoClip;
+    [SerializeField] private AudioClip danhoClip;
+
+    private AudioSource audioSource;
 
     void Start()
     {
         puntoInicio = transform.position; // Guarda donde inicia el personaje
+        audioSource = GetComponent<AudioSource>();
+
+
     }
 
     void Update()
@@ -97,6 +105,13 @@ public class controladorPersonaje : MonoBehaviour
                 float direccion = transform.localScale.x > 0 ? 1f : -1f;
                 rb.linearVelocity = new Vector2(direccion * velocidadProyectil, 0f);
             }
+
+            // Reproduce el sonido de disparo
+            if (audioSource != null && disparoClip != null)
+            {
+                audioSource.PlayOneShot(disparoClip);
+            }
+
             // Destruye el proyectil después de 5 segundos
             Destroy(proyectil, 5f);
         }
@@ -113,6 +128,12 @@ public class controladorPersonaje : MonoBehaviour
         if (collision.gameObject.CompareTag("Pinchos") || collision.gameObject.CompareTag("Enemigo"))
         {
             GameManager.Instance.SubLife(1);
+            // Sonido al recibir daño
+            if (audioSource != null && danhoClip != null)
+            {
+                audioSource.PlayOneShot(danhoClip);
+            }
+
             Debug.Log("Vida restante: " + GameManager.Instance.GetLife());
 
             if (GameManager.Instance.GetLife() == 0)

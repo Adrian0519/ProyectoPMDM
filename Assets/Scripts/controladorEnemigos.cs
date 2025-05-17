@@ -7,6 +7,8 @@ public class MovimientoEnemigo : MonoBehaviour
     [SerializeField] private float velocidad = 2f;
     //Prefab del power-up
     [SerializeField] private GameObject prefabPowerUp;
+    // Sonido al morir
+    [SerializeField] private AudioClip muerteSound;
 
     // Indica si el enemigo se está moviendo hacia la derecha.
     private bool moviendoDerecha = true;
@@ -37,9 +39,14 @@ public class MovimientoEnemigo : MonoBehaviour
         {
             Girar();
         }
-        //La bala se desruye si impacta
+
         if (col.gameObject.CompareTag("Bala"))
         {
+            // Reproducir sonido de muerte
+            if (muerteSound != null)
+            {
+                AudioSource.PlayClipAtPoint(muerteSound, Camera.main.transform.position);
+            }
 
             // Probabilidad del 20% de soltar power-up
             float chance = Random.Range(0f, 1f);
@@ -53,8 +60,6 @@ public class MovimientoEnemigo : MonoBehaviour
         }
     }
 
-
-
     // Método que invierte la dirección de movimiento del enemigo
     private void Girar()
     {
@@ -66,10 +71,8 @@ public class MovimientoEnemigo : MonoBehaviour
         escala.x *= -1;
         transform.localScale = escala;
     }
-
-    
-
 }
+
 
 
 
