@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1783419888201849902}
   - component: {fileID: 1459755972915878079}
-  - component: {fileID: 2875779505485101254}
   - component: {fileID: 4669591271072932355}
   - component: {fileID: 6884111512060807757}
   - component: {fileID: 8875285936886119893}
+  - component: {fileID: -5194119670475174095}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemigo
@@ -91,28 +91,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &2875779505485101254
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5545126375543772102}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 2fe1af0400c3d714e9deca7423ff3f57, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4669591271072932355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,3 +179,25 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.83, y: 0.92}
   m_EdgeRadius: 0
+--- !u!95 &-5194119670475174095
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5545126375543772102}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2fe1af0400c3d714e9deca7423ff3f57, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

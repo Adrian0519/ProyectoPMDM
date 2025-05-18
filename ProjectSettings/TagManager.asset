@@ -11,6 +11,7 @@ TagManager:
   - Enemigo
   - Bloqueo
   - Bala
+  - VidaUI
   layers:
   - Default
   - TransparentFX
