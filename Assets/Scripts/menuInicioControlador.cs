@@ -13,6 +13,7 @@ public class menuInicioControlador : MonoBehaviour
     [SerializeField] private Button botonOpciones;
     [SerializeField] private Button botonSalir;
     [SerializeField] private Button botonJugar;
+    [SerializeField] private Button botonPantallaCompleta;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -30,6 +31,8 @@ public class menuInicioControlador : MonoBehaviour
         if (botonJugar != null)
             botonJugar.onClick.AddListener(IniciarJuego);
 
+        if (botonPantallaCompleta != null)
+            botonPantallaCompleta.onClick.AddListener(TogglePantallaCompleta);
     }
 
     // Update is called once per frame
@@ -60,6 +63,13 @@ public class menuInicioControlador : MonoBehaviour
     {
         Debug.Log("Cargando Nivel 1...");
         SceneManager.LoadScene("Level1"); 
+    }
+
+    //Probar pantalla completa.
+    void TogglePantallaCompleta()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+        Debug.Log("Pantalla completa: " + Screen.fullScreen);
     }
 
 }
