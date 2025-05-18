@@ -15,7 +15,7 @@ public class ControladorGameOver : MonoBehaviour
 
     private void ReiniciarNivel()
     {
-        //Setear las vidas a 0 para evitar un bucle al reiniciar el nivel.
+        // Setear las vidas a 3 al reiniciar el nivel.
         GameManager.Instance.ReiniciarEstado();
         SceneManager.LoadScene("Level1");
     }
