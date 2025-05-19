@@ -18,6 +18,9 @@ public class MovimientoEnemigo : MonoBehaviour
     {
         // Asigna la etiqueta "Enemigo" a este GameObject
         gameObject.tag = "Enemigo";
+        // No colisionan entre si
+        Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Enemigos"), LayerMask.NameToLayer("Enemigos"));
+
     }
 
     // Método llamado una vez por frame
