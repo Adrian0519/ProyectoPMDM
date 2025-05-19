@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject); // persiste entre escenas
-            SceneManager.sceneLoaded += OnSceneLoaded; // Escuchar cambios de escena para el GameOver
+            SceneManager.sceneLoaded += OnSceneLoaded; // Escuchar cambios de escena 
         }
         else
         {
@@ -25,7 +25,10 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        life = 3;
+        if (!yaInicializado)
+        {
+            ReiniciarEstado(); // Solo al inicio real del juego
+        }
     }
 
     void Update()
@@ -75,15 +78,16 @@ public class GameManager : MonoBehaviour
     {
         if (scene.name == "GameOver")
         {
-            Destroy(gameObject); //Esto hace que el GameManager se destruya al cargar GameOver
+            Destroy(gameObject); // Reinicio total al perder
         }
         else
         {
-            if (scene.name == "Level1" || scene.name == "Level2")
+            if (scene.name == "MenuInicio") // Menú principal reinicia el juego
             {
-                life = 3;
+                ReiniciarEstado();
             }
-            // Busca el componente UI en cada nueva escena para que la ui se muestre correctamente.
+
+            // Busca el componente de UI para actualizarlo en la nueva escena
             vidaPlayerGUI = GameObject.FindWithTag("VidaUI")?.GetComponent<TextMeshProUGUI>();
             ActualizarUI();
         }

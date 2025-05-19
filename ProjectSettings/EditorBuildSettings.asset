@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Transicion.unity
     guid: 2aaa1a71c7c32e248a52ab2b786553d9
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Level2()Erratico.unity
     guid: 3412bc192c8140047b33cfb5266a04cf
   - enabled: 1
@@ -26,6 +26,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level2.unity
     guid: 9a35e0fcd26e82943b2bac228b6d6d97
+  - enabled: 1
+    path: Assets/Scenes/EscenaFinal.unity
+    guid: 45198b30c08c94b4197222cecf4c66e1
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
