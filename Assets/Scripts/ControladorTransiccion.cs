@@ -1,18 +1,34 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class finalNivel : MonoBehaviour
+using TMPro;
+
+public class ControladorTransiccion : MonoBehaviour
 {
+    [SerializeField] private TextMeshProUGUI textoPantalla;
+    private bool puedeContinuar = false;
 
     void Start()
     {
-        StartCoroutine(CargarEscenaDespuesDeTiempo(3f));
+        StartCoroutine(MostrarTextoDespuesDeTiempo(3f));
     }
 
-    IEnumerator CargarEscenaDespuesDeTiempo(float tiempo)
+    void Update()
+    {
+        if (puedeContinuar && Input.GetKeyDown(KeyCode.Return)) // Enter
+        {
+            SceneManager.LoadScene("Level2");
+        }
+    }
+
+    IEnumerator MostrarTextoDespuesDeTiempo(float tiempo)
     {
         yield return new WaitForSeconds(tiempo);
-        SceneManager.LoadScene("Level2");
+        if (textoPantalla != null)
+        {
+            textoPantalla.text = "Pulsa Enter para continuar";
+        }
+        puedeContinuar = true;
     }
 }
+
