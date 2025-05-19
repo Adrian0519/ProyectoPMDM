@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PausaJuego : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class PausaJuego : MonoBehaviour
     [SerializeField] private Button botonReanudar;
     [SerializeField] private Button botonOpciones;
     [SerializeField] private Button botonVolver;
+    [SerializeField] private Button botonMenuPrincipal;
+    [SerializeField] private Button botonPantallaCompleta;
 
     void Start()
     {
@@ -22,6 +25,11 @@ public class PausaJuego : MonoBehaviour
 
         if (botonVolver != null)
             botonVolver.onClick.AddListener(CerrarOpciones);
+
+        if (botonMenuPrincipal != null)
+            botonMenuPrincipal.onClick.AddListener(VolverAlMenuPrincipal);
+        if (botonPantallaCompleta != null)
+            botonPantallaCompleta.onClick.AddListener(TogglePantallaCompleta);
     }
 
     void Update()
@@ -71,5 +79,16 @@ public class PausaJuego : MonoBehaviour
     {
         menuOpciones.SetActive(false);
         menuPausa.SetActive(true);
+        botonOpciones.gameObject.SetActive(true);
+    }
+    void VolverAlMenuPrincipal()
+    {
+        Time.timeScale = 1f; //Restablecer el tiempo antes de cambiar de escena
+        SceneManager.LoadScene("MenuInicio"); // Asegúrate de que esta escena exista
+    }
+    void TogglePantallaCompleta()
+    {
+        Screen.fullScreen = !Screen.fullScreen;
+        Debug.Log("Pantalla completa: " + Screen.fullScreen);
     }
 }
