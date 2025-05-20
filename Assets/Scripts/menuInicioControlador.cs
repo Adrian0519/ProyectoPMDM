@@ -8,7 +8,9 @@ public class menuInicioControlador : MonoBehaviour
 {
     [SerializeField] private GameObject menuInicio;
     [SerializeField] private GameObject menuOpciones;
-
+    [SerializeField] private GameObject menuControles;
+    [SerializeField] private Button botonControles; 
+    [SerializeField] private Button botonVolverDesdeControles; 
     [SerializeField] private Button botonVolver;
     [SerializeField] private Button botonOpciones;
     [SerializeField] private Button botonSalir;
@@ -33,7 +35,14 @@ public class menuInicioControlador : MonoBehaviour
 
         if (botonPantallaCompleta != null)
             botonPantallaCompleta.onClick.AddListener(TogglePantallaCompleta);
+
+        if (botonControles != null)
+            botonControles.onClick.AddListener(AbrirControles);
+
+        if (botonVolverDesdeControles != null)
+            botonVolverDesdeControles.onClick.AddListener(CerrarControles);
     }
+
 
     // Update is called once per frame
     void Update()
@@ -52,6 +61,19 @@ public class menuInicioControlador : MonoBehaviour
         menuOpciones.SetActive(false);
         menuInicio.SetActive(true);
     }
+
+    void AbrirControles()
+    {
+        menuOpciones.SetActive(false);
+        menuControles.SetActive(true);
+    }
+
+    void CerrarControles()
+    {
+        menuControles.SetActive(false);
+        menuOpciones.SetActive(true);
+    }
+
 
     void SalirDelJuego()
     {
