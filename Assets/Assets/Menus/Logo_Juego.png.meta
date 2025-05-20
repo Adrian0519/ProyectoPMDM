@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 1e9e7117fd6260f4aa80bcbf77223096
+guid: 243d07974d2d0b141967f91669af5154
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1064927018323353900
-    second: Logo_Juego 1_0
+      213: 6429434225063385183
+    second: Logo_Juego_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Logo_Juego 1_0
+      name: Logo_Juego_0
       rect:
         serializedVersion: 2
         x: 50
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4dede11e48e9831f0800000000000000
-      internalID: -1064927018323353900
+      spriteID: f5854a3fc50f93950800000000000000
+      internalID: 6429434225063385183
       vertices: []
       indices: 
       edges: []
